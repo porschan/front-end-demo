@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test</title>
+</head>
+<body>
+  <div id="result"></div>
+  <button type="button" onclick="testMockJax()">点我!</button>
+  <script src="js/jquery-1.11.1.min.js"></script>
+  <script src="js/vendor/jquery.mockjax.js"></script>
+  <script>
+  	/***************** mockjax 测试 *****************/
+  	
+  	$.mockjaxSettings = {
+  		contentType : "application/json",
+  		logging : true,
+  		responseTime: 50,
+  		status : 200
+  	}
+  	
+  	$.mockjax({
+		  url: '/products/',
+			responseText: {"Status":"Erro","Erro":"账号名或密码或验证码有误"}
+		});
+		
+		function testMockJax(){
+			var url = "/products/";
+			var para = {};
+			$.post(url,para,function(data){
+				$("#result").html(data.Erro);
+				console.info(data);
+			})
+		}
+		
+		/***************** mockjax 测试 *****************/
+		
+  </script>
+  
+</body>
+</html>
