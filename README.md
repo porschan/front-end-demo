@@ -1,3 +1,5 @@
 # front-end-demo
 
-jquery.mockjax.js - Ç°¶ËÄ£ÄâajaxÖ®ºóµÃµ½µÄ½á¹û - ×÷Õß£ºhttps://github.com/jakerella/jquery-mockjax
+jquery.mockjax.js - å‰ç«¯æ¨¡æ‹Ÿajaxä¹‹åå¾—åˆ°çš„ç»“æœ - ä½œè€…ï¼šhttps://github.com/jakerella/jquery-mockjax
+
+SpinKit-master - html åŠ è½½åŠ¨ç”» - ä½œè€…ï¼šhttp://www.cnblogs.com/lhb25/p/loading-spinners-animated-with-css3.html
