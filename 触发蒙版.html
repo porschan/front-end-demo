@@ -1,0 +1,30 @@
+﻿<html>
+<head>
+<style>
+    div {
+        display: inline-block;//单行的多个元素
+        width: 200px;
+        height: 200px;
+        background: url("1534088741_5gIVg9.jpg") no-repeat 0 0 transparent;//背景图片+不重复+位置为左上角
+        background-size: 100% 100%;
+    }
+    div span{
+        display: none;//初始化为不显示span内容
+    }
+    div:hover {
+        background: black;//更改背景颜色
+    }
+    div:hover span {
+        display: unset;//鼠标浮动在上面的时候显示span的内容
+    }
+</style>
+</head>
+<body>
+
+<div>
+    <span>
+        要显示的文字
+    </span>
+</div>
+</body>
+</html>

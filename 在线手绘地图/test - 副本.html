@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>惜颜美</title>
+    <!-- 引入 WeUI 注：1.0版本 -->
+    <link rel="stylesheet" href="css/weui.min.css"/>
+    <!-- 引入 swiper -->
+    <link rel="stylesheet" href="css/swiper-3.4.2.min.css">
+    <!--<link rel="stylesheet" href="css/animate.min.css">-->
+    <script src="js/zepto.min.js"></script>
+
+</head>
+<body>
+<style>
+    html {
+        height: 100%;
+    }
+
+    body {
+        max-width: 1080px; /*pc最大宽度*/
+        margin: 0 auto;
+        height: 100%;
+        border-right: 1px solid #c5c5c5;
+        border-left: 1px solid #c5c5c5;
+        box-shadow: 2px 2px 3px #aaaaaa;
+    }
+
+</style>
+<div class="weui-tab" id="weuitab"><!--继承body 、height100%-->
+
+    <div class="swiper-container2 weui-tab__panel"><!--Swiper的容器-->
+        <div class="swiper-wrapper"><!--触控的对象-->
+
+            <!----------------weui-panel1----首页-------------------->
+            <div class="swiper-slide"><!--切换的滑块-->
+                <div class="weui-panel" style="border:1px red solid;">
+                    <h1>首页</h1>
+                </div>
+            </div>
+
+            <!----------------weui-panel2-------地图----------------->
+            <div class="swiper-slide"><!--切换的滑块-->
+                <div class="weui-panel"  style="border:1px red solid;">
+                    <h2>地图</h2>
+                </div>
+            </div>
+
+            <!----------------weui-panel3-------我的----------------->
+            <div class="swiper-slide"><!--切换的滑块-->
+                <div class="weui-panel" >
+                    <!---------------------------------------------------->
+
+                    <!---------------------------------------------------->
+                    <div style="height:25px">
+                    </div>
+                    <div align="center">
+                        <img src="icon/头像.png" width="25%" height="25%"/>
+                    </div>
+                    <div align="center">
+                        <a style=" " href="html/Login/" class="weui-btn weui-btn_mini weui-btn_default">登录</a>
+                        <a style=" " href="html/Register/" class="weui-btn weui-btn_mini weui-btn_default">注册</a>
+                    </div>
+                    <!---------------------------------------------------->
+                    <div class="weui-media-box weui-media-box_small-appmsg">
+                        <div class="weui-cells">
+                            <div class="weui-panel__hd">地图管理</div>
+                            <a class="weui-cell weui-cell_access" href="javascript:ShowWarnAlert();">
+                                <div class="weui-cell__hd"><img src="icon/上传2.png" alt=""
+                                                                style="width:20px;margin-right:5px;display:block"></div>
+                                <div class="weui-cell__bd weui-cell_primary">
+                                    <p>上传新地图</p>
+                                </div>
+                                <span class="weui-cell__ft"></span>
+                            </a>
+                            <a class="weui-cell weui-cell_access" href="javascript:ShowWarnAlert();">
+                                <div class="weui-cell__hd"><img src="icon/编辑2.png" alt=""
+                                                                style="width:20px;margin-right:5px;display:block"></div>
+                                <div class="weui-cell__bd weui-cell_primary">
+                                    <p>编辑地图</p>
+                                </div>
+                                <span class="weui-cell__ft"></span>
+                            </a>
+                            <a class="weui-cell weui-cell_access" href="javascript:ShowWarnAlert();">
+                                <div class="weui-cell__hd"><img src="icon/收藏2.png" alt=""
+                                                                style="width:20px;margin-right:5px;display:block"></div>
+                                <div class="weui-cell__bd weui-cell_primary">
+                                    <p>我的收藏</p>
+                                </div>
+                                <span class="weui-cell__ft"></span>
+                            </a>
+                        </div>
+                    </div>
+                    <!---------------------------------------------------->
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!----------------weui-tabbar------------------------>
+    <div class="weui-tabbar swiper-no-swiping">
+        <a href="javascript:;" class="weui-tabbar__item weui-bar__item_on" id="tabbar1">
+            <img src="icon/首页.png" alt="" class="weui-tabbar__icon">
+            <p class="weui-tabbar__label">首页</p>
+        </a>
+        <a href="javascript:;" class="weui-tabbar__item" id="tabbar2">
+            <img src="icon/地图.png" alt="" class="weui-tabbar__icon">
+            <p class="weui-tabbar__label">地图</p>
+        </a>
+        <a href="javascript:;" class="weui-tabbar__item" id="tabbar3">
+            <img src="icon/我的.png" alt="" class="weui-tabbar__icon">
+            <p class="weui-tabbar__label">我的</p>
+        </a>
+    </div>
+
+    <!--------------------加载图标------------------------------->
+    <div id="loadingToast" style="display:none;">
+        <div class="weui-mask_transparent"></div>
+        <div class="weui-toast">
+            <i class="weui-loading weui-icon_toast"></i>
+            <p class="weui-toast__content">注销中</p>
+        </div>
+    </div>
+
+</div>
+
+<!-- 引入 swiper -->
+<script src="js/swiper-3.4.2.min.js"></script>
+<!--<script src="js/swiper.animate1.0.2.min.js"></script>-->
+<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=36c222d43ab9f95da47215dfca03885c"></script>
+
+
+<script type="text/javascript">
+
+    // //页面导航js
+    var mySwiper2 = new Swiper('.swiper-container2', {
+        //autoplay: 5000,//可选选项，自动滑动
+        touchRatio: 0.5,
+        onSlideChangeStart: function (swiper) {
+            switch (swiper.activeIndex) {//滑动页面时底部导航文字也跟着激活
+                case 0:
+                    $("#tabbar1").trigger("click");
+                    break;
+                case 1:
+                    $("#tabbar2").trigger("click");
+                    break;
+                case 2:
+                    $("#tabbar3").trigger("click");
+                    break;
+            }
+            //alert(swiper.activeIndex);
+
+        },
+    });
+
+    $(function () {
+        $('.weui-tabbar__item').on('click', function () {
+            //底部菜单字体颜色切换
+            $(this).addClass('weui-bar__item_on').siblings('.weui-bar__item_on').removeClass('weui-bar__item_on');
+            //点击底部导航图标转到指定页面
+            mySwiper2.slideTo($(this).attr('id').charAt(6) - 1, 500, false);//索引编号，时间延时，onSlideChange回调函数
+        });
+    });
+
+</script>
+</body>
+</html>
