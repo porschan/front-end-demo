@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>自定义键盘输入</title>
+</head>
+<body>
+<style>
+        .box{
+            width: 200px;
+            height: 40px;
+            border: 1px solid #dedede;
+            padding-left: 5px;
+            line-height: 40px;
+            overflow: hidden;
+        }
+</style>
+        <div class="box" contenteditable="true" ></div>
+ 
+<style>
+    body{
+        margin: 0;
+    }
+    .keyboard{
+        width: 100%;
+        height:12rem;
+        position: fixed;
+        bottom: 0;
+    }
+    .keyboard .number{
+        width: 75%;
+        float: left;
+        height: 100%;
+        box-sizing: border-box;
+    }
+    .keyboard .fuc{
+        box-sizing: border-box;
+        width: 25%;
+        height: 100%;
+        float: left;
+        border: 1px solid #666;
+        border-left: none;
+        text-align: center;
+        line-height: ;
+    }
+    .keyboard .fuc .delinput{
+        display: block;
+        height: 25%;
+        width: 100%;
+        border-bottom: 1px solid #666;
+        line-height: 3rem;
+        box-sizing: border-box;
+    }
+    .keyboard .fuc .completeinput{
+        line-height: 9rem;
+        display: block;
+    }
+    .keyboard   .line{
+        display: block;
+        width: 100%;
+        height: 25%;
+    }
+    .keyboard  .line  span{
+        display: table-cell;
+        vertical-align: middle;
+        width:33.3333333%;
+        height: 100%;
+        border-top: 1px solid #666;
+        border-left: 1px solid #666;
+        text-align: center;
+        box-sizing: border-box;
+        float: left;
+        font-size: 20px;
+        font-weight: bold;
+        line-height: 3rem;
+    }
+ 
+    .keyboard  .line  span:nth-child(3){
+        border-right: 1px solid #666;
+    }
+    .keyboard  .line:last-child  span{
+        border-bottom: 1px solid #666;
+    }
+    .keyboard  span:active{
+            background-color: #3e50b4;
+    }
+</style>
+        <div class="keyboard">
+ 
+            <div class="number">
+                <div  class="line">
+                        <span>1</span>
+                        <span>2</span>
+                        <span>3</span>
+ 
+                </div>
+                <div  class="line">
+                    <span>4</span>
+                    <span>5</span>
+                    <span>6</span>
+                </div>
+                <div  class="line">
+                    <span>7</span>
+                    <span>8</span>
+                    <span>9</span>
+                </div>
+            <div  class="line">
+                <span>0</span>
+                <span>.</span>
+                <span></span>
+            </div>
+        </div>
+            <div class="fuc">
+                   <span class="delinput">删除</span>
+                <span class="completeinput">完成</span>
+            </div>
+        </div>
+ 
+<script>
+           var input =  document.getElementsByClassName("box");
+           keyboard(input,callback);
+ 
+           //数字键盘逻辑
+           var oldk=0;
+            function  keyboard(el,calback){
+                elem = el[0] ;
+                var  oldv = el.innerHTML;
+                var arr = document.querySelector(".keyboard").getElementsByTagName("span");
+                arr = Array.prototype.slice.call(arr);
+                  arr.forEach(function(element,index){
+                       element.addEventListener("click",function (e) {
+                           if(this.innerHTML == ".") {
+                               if (oldk == 0) {
+                                   oldk = 1;
+                               } else if(oldk ==  1) {
+                                    return ;
+                               }
+                           }else{
+                               oldk = 0;
+                           }
+                            if(this.innerHTML == "完成"){
+                                    if(elem.innerHTML == '' ||  elem.innerHTML == undefined){
+                                        console.log("输入为空！")
+                                    }else{
+                                        console.log("输入完成~",elem.innerHTML);
+                                        callback(elem.innerHTML);
+                                    }
+                            }else if(this.innerHTML == "删除"){
+                                    if(elem.innerHTML == '' || elem.innerHTML == undefined) {
+ 
+                                    }else{
+                                        elem.innerHTML = elem.innerHTML.slice(0,elem.innerHTML.length-1);
+                                    }
+                            }else{
+                                    if(oldv == undefined){
+                                        elem.innerHTML =  this.innerHTML;
+                                    }else{
+                                        elem.innerHTML =compute(elem.innerHTML +  this.innerHTML);
+                                    }
+                                    oldv = elem.innerHTML;
+                            }
+                       })
+                  })
+            }
+            function compute(number){
+                    var tem = number.toString().split(".");
+                    if(tem.length == 1 || (tem.length > 2 &&tem[1]==''  )){
+                        return tem[0];
+                    } else if(tem.length==2 && tem[1] =='' && tem[0] == ''){
+                             return "0.";
+                    } else if( tem.length==2 && tem[1] =='' && tem[0]!=='' ){
+                            return tem[0]+".";
+                    } else if(tem.length >=2 &&tem[1]!==''){
+                        return tem[0]+"."+  (tem[1].length>=2?tem[1].substring(0,2) : tem[1]);
+                    }
+            }
+           //数字键盘逻辑
+            function callback(value){
+            //    输入完成后的操作
+                alert("输入的数据是："+value);
+            }
+</script>
+</body>
+</html>
