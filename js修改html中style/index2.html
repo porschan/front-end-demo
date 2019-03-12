@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>js修改style</title>
+<style>
+.myStyle{
+color :red;
+}
+</style>
+</head>
+<body>
+<div class="myStyle">asdfg</div>
+<script type="text/javascript">
+document.styleSheets[0].cssRules[0].style.cssText = "color:blue;";
+</script>
+</body>
+</html>
